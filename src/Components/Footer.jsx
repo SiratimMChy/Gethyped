@@ -69,34 +69,34 @@ const Footer = () => {
 
   return (
     <footer className="bg-[#FAF4EC]">
-      <div className="relative z-20 hidden md:flex flex-col items-center text-center px-6 pt-12 md:pt-16 pb-24 md:pb-32">
+      <div className="relative z-20 hidden md:flex flex-col items-center text-center px-6 pt-12 md:pt-16 pb-8 md:pb-12">
         <h2 className="text-[clamp(3.5rem,7vw,88px)] text-[#161616] font-semibold leading-[1.5em] tracking-[-0.05em] mb-2.5">
           Let's Get Hyped!
         </h2>
 
-        <div className="relative flex z-10 items-center justify-center gap-[0.5em] cursor-pointer flex-wrap">
+        <div className="relative flex z-10 items-center justify-center gap-3 cursor-pointer flex-wrap">
           <Motion.a
             href="mailto:info@gethyped.nl"
-            whileHover={{ scale: 1.08, rotate: -5, transition: { duration: 0.15, ease: 'easeOut' } }}
-            whileTap={{ scale: 0.95, rotate: 0 }}
-            transition={{ duration: 0.4, ease: 'easeInOut' }}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold cursor-pointer no-underline outline-none transition-colors bg-transparent border-[1.5px] border-black  text-black"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.15, ease: 'easeInOut' }}
+            className="inline-flex items-center gap-3 pl-4 pr-1.5 py-1.5 rounded-[12px] text-[14px] font-bold cursor-pointer no-underline outline-none transition-colors bg-transparent border border-[#161616]/60 text-[#161616] hover:bg-white/50 shadow-sm"
           >
-            <span className="font-bold text-inherit">Mail ons direct</span>
-            <div className="w-8 h-8 flex items-center justify-center rounded-xl shadow-sm text-base transition-colors hover:bg-white  bg-black text-white">
+            <span className="font-bold text-inherit whitespace-nowrap">Mail ons direct</span>
+            <div className="w-[28px] h-[28px] flex items-center justify-center rounded-[8px] text-[16px] transition-colors bg-[#161616] text-white">
               <HiMail />
             </div>
           </Motion.a>
 
           <Motion.a
-            href="#"
-            whileHover={{ scale: 1.08, rotate: -5, transition: { duration: 0.15, ease: 'easeOut' } }}
-            whileTap={{ scale: 0.95, rotate: 0 }}
-            transition={{ duration: 0.4, ease: 'easeInOut' }}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold cursor-pointer no-underline outline-none transition-colors bg-[#FF5F1F] text-white border-[1.5px] border-transparent hover:bg-[#e0521a]"
+            href="#contact"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.15, ease: 'easeInOut' }}
+            className="inline-flex items-center gap-3 pl-4 pr-1.5 py-1.5 rounded-[12px] text-[14px] font-bold cursor-pointer no-underline outline-none transition-colors bg-[#FF5F1F] text-white border border-[#FF5F1F] hover:bg-[#e0521a] shadow-sm"
           >
-            <span className="font-bold text-inherit">Get Results</span>
-            <div className="w-8 h-8 flex items-center justify-center rounded-xl shadow-sm text-base transition-colors bg-white text-[#FF5F1F]">
+            <span className="font-bold text-inherit whitespace-nowrap">Get Results</span>
+            <div className="w-[28px] h-[28px] flex items-center justify-center rounded-[8px] text-[16px] transition-colors bg-white text-[#FF5F1F]">
               <HiFire />
             </div>
           </Motion.a>
@@ -117,9 +117,9 @@ const Footer = () => {
             }}
           ></div>
 
-          <div className="relative pt-0 md:pt-0 -mt-8 md:mt-auto md:mb-0 w-full md:w-auto md:shrink-0 md:self-end flex justify-center md:justify-start md:pl-4 origin-center md:origin-bottom-left" style={{ transform: 'rotateX(4deg) rotateY(-10deg) rotateZ(1deg)' }}>
+          <div className="relative pt-0 md:pt-0 -mt-8 md:mt-auto md:-mb-14 w-full md:w-auto md:shrink-0 md:self-end flex justify-center md:justify-start md:pl-0.5 origin-center md:origin-bottom-left" style={{ transform: 'rotateX(4deg) rotateY(-10deg) rotateZ(1deg)' }}>
             <div className="flex justify-center md:justify-start items-center md:items-end py-1 px-2 md:px-0 z-10 w-full md:w-auto overflow-visible">
-              <div className="transform origin-center md:origin-left scale-[1.05] md:scale-[1.2] flex justify-center md:justify-start w-full md:w-auto ml-0 items-center md:items-end">
+              <div className="transform origin-center md:origin-left scale-[1.05] md:scale-[1.45] flex justify-center md:justify-start w-full md:w-auto ml-0 items-center md:items-end">
                 <Logo width={300} height={200} />
               </div>
             </div>
@@ -128,11 +128,11 @@ const Footer = () => {
           <div className="relative w-full md:w-auto">
             {/* Desktop Layout */}
             <div className="relative z-10 px-6 md:px-0 py-6 md:py-0 mt-34 md:mt-40 hidden md:block w-full">
-              <div className="max-w-[850px] ml-auto flex flex-col justify-end w-full">
+              <div className="max-w-[720px] ml-auto flex flex-col justify-end w-full">
 
                 {/* Top Content Row using Strict Grid aligned geometry */}
-                <div className="grid grid-cols-[1fr_220px] gap-x-16 md:gap-x-24 gap-y-4 w-full items-start">
-                  
+                <div className="grid grid-cols-[1fr_200px] gap-x-16 md:gap-x-16 gap-y-4 w-full items-start">
+
                   {/* Row 1: Nav Links & Contact Info */}
                   {/* Left Top */}
                   <div className="flex gap-3 xl:gap-4 md:mt-[20px]">
@@ -152,9 +152,9 @@ const Footer = () => {
 
                   {/* Row 2: Follow Us & Adres Info */}
                   {/* Left Bottom */}
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-8 md:gap-10">
                     <span className="font-bold text-[#161616] text-[16px] whitespace-nowrap">Follow us</span>
-                    <div className="flex gap-2">
+                    <div className="flex gap-3 md:gap-4">
                       {socials.map((social, i) => (
                         <Motion.a
                           key={i}
@@ -180,15 +180,15 @@ const Footer = () => {
                 </div>
 
                 {/* Bottom Signature Row */}
-                <div className="flex justify-between items-center w-full mt-12 md:mt-6">
+                <div className="flex justify-between items-center w-full mt-12 md:mt-2">
                   <div className="flex-1 flex justify-start">
-                    <p className="text-[13px] md:text-[14px] font-medium text-gray-500">© 2025 Get Hyped</p>
+                    <p className="text-[13px] md:text-xs font-medium text-gray-500">© 2025 Get Hyped</p>
                   </div>
                   <div className="flex-1 flex justify-center md:-ml-[10%]">
-                    <p className="text-[13px] md:text-[14px] font-medium text-gray-500">© Design by Dylan</p>
+                    <p className="text-[13px] md:text-xs font-medium text-gray-500">© Design by Dylan</p>
                   </div>
-                  <div className="w-[220px] flex justify-start">
-                    <a href="#" className="text-[13px] md:text-[14px] font-medium text-gray-500 hover:text-[#161616] transition-colors">Privacyvoorwaarden</a>
+                  <div className="w-[200px] flex justify-start">
+                    <a href="#" className="text-[13px] md:text-xs font-medium text-gray-500 hover:text-[#161616] transition-colors">Privacyvoorwaarden</a>
                   </div>
                 </div>
 
