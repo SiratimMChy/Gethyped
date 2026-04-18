@@ -101,6 +101,37 @@ const Footer = () => {
             </div>
           </Motion.a>
         </div>
+
+        {/* Floating Pink Badge */}
+        <div className="absolute right-6 lg:right-28 bottom-0 md:bottom-8 z-50 pointer-events-none hidden md:block">
+          <div className="relative w-[120px] h-[120px] rounded-full bg-[#FFA1FA] flex items-center justify-center hover:scale-105 transition-transform duration-300 pointer-events-auto cursor-pointer shadow-sm">
+            <Motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 12, ease: 'linear', repeat: Infinity }}
+              className="absolute inset-0 w-full h-full"
+            >
+              <svg viewBox="0 0 100 100" className="w-full h-full overflow-visible">
+                <path
+                  id="badgeTextPath"
+                  d="M 50, 50 m -33.5, 0 a 33.5,33.5 0 1,1 67,0 a 33.5,33.5 0 1,1 -67,0"
+                  fill="none"
+                />
+                <text className="text-[10px] font-bold tracking-[0.1em] uppercase fill-[#161616]">
+                  <textPath href="#badgeTextPath" startOffset="0%" textLength="210">
+                    GET HYPED • GET NOTICED • GET RESULTS • 
+                  </textPath>
+                </text>
+              </svg>
+            </Motion.div>
+            
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="text-[#161616] font-black text-[38px] tracking-[-0.08em] leading-none" style={{ fontFamily: 'Impact, sans-serif', transform: 'rotate(-4deg)' }}>
+                GH
+              </span>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <div className="relative z-10 w-full overflow-hidden flex items-end py-2 px-4 md:px-12 md:pb-8 pb-8 -mt-16 md:-mt-32">
