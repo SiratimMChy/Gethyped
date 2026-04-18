@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+
+
+/* Clients Section Styles */
+.section_clients {
+  background-color: #f5f0e8;
+}
+
+.section-padding-128px {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
+.padding-bottom.padding-72px {
+  padding-bottom: 4.5rem;
+}
+
+.padding-global {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.container-col-12 {
+  max-width: 1920px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.max-width-640px {
+  max-width: 640px;
+}
+
+.max-width-full {
+  max-width: 100%;
+  width: fit-content;
+}
+
+.heading-m {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 600;
+  line-height: 1.1;
+  color: #000;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .heading-m {
+    font-size: clamp(2rem, 6vw, 3rem);
+    white-space: normal;
+  }
+}
+
+.mwg_effect008 .container {
+  width: max-content;
+  white-space: nowrap;
+  display: flex;
+  gap: 1vw;
+  padding: 0 1vw 0 0;
+  user-select: none;
+  cursor: grab;
+}
+
+.mwg_effect008 .container:active {
+  cursor: grabbing;
+}
+
+.client-card {
+  background: white;
+  border-radius: 1rem;
+  padding: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 300px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.mwg_effect008 {
+  overflow: hidden;
+  margin-left: -2rem;
+  margin-right: -2rem;
+}
+
+@media (max-width: 768px) {
+  .client-card {
+    width: 140px;
+    height: 140px;
+    padding: 1.25rem;
+  }
+  
+  .mwg_effect008 .container {
+    gap: 0.75rem;
+  }
+  
+  .mwg_effect008 {
+    margin-left: -1rem;
+    margin-right: -1rem;
+  }
+  
+  .section-padding-128px {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+  
+  .padding-bottom.padding-72px {
+    padding-bottom: 2.5rem;
+  }
+  
+  .padding-global {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+.section-divider {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin-top: 4rem;
+}
+
+/* Expertise Cards Animation Styles */
+.mwg_effect031 {
+  position: relative;
+}
+
+.expertise-slide {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.expertise-wrap {
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.expertise-content {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+@media (max-width: 768px) {
+  .expertise-wrap {
+    padding: 0 1rem;
+  }
+}
