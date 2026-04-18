@@ -148,17 +148,20 @@ const Intro = () => {
   }, []);
 
   return (
-    <section id="intro-home" className="section_intro bg-[#FAF4EC] py-24 md:py-32 overflow-hidden">
-      <div className="padding-global max-w-[1440px] mx-auto px-4 md:px-8">
+    <section id="intro-home" className="section_intro bg-[#FAF4EC] py-6 md:py-32 overflow-hidden">
+      <div className="padding-global max-w-[1440px] mx-auto px-5 md:px-8">
         <div className="container-col-12">
           
           {/* Main Heading — matching Webflow's structure */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 mb-24 lg:mb-32">
+          <div className="grid grid-cols-1 lg:grid-cols-12 mb-12 lg:mb-32">
             <div className="lg:col-span-12">
-              <h2 className="text-[2.5rem] md:text-[3.5rem] lg:text-[4rem] font-medium text-black leading-[1.1] tracking-[-0.03em] max-w-[1280px]">
-                Wij maken content die opvalt. <br className="hidden md:block" />
-                Die blijft hangen. Die jouw doelgroep raakt <br className="hidden md:block" />
-                en jouw merk in beweging brengt. Snel, krachtig en energiek.
+              <h2 className="text-[1.55rem] md:text-[3.5rem] lg:text-[4rem] font-semibold text-black leading-[1.1] tracking-[-0.04em] max-w-[1280px]">
+                Wij maken content die<br className="md:hidden" />
+                opvalt. Die blijft hangen.<br className="md:hidden" /><br className="hidden md:block" />
+                Die jouw doelgroep<br className="md:hidden" />
+                raakt en jouw merk in<br className="md:hidden" /><br className="hidden md:block" />
+                beweging brengt. Snel,<br className="md:hidden" />
+                krachtig en energiek.
               </h2>
             </div>
           </div>
@@ -167,8 +170,8 @@ const Intro = () => {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 items-end">
             
             {/* 1. Small Video Card (md:col-span-3) */}
-            <div className="md:col-span-5 lg:col-span-3 order-1">
-              <div className="small-image aspect-4/5 rounded-xl overflow-hidden relative shadow-lg">
+            <div className="p-1 md:col-span-5 lg:col-span-3 order-1 rotate-[4deg] md:rotate-0 transition-transform max-w-[86%] md:max-w-none">
+              <div className="small-image aspect-[2/3] md:aspect-4/5 rounded-xl overflow-hidden relative shadow-lg">
                 <img 
                   src="https://cdn.prod.website-files.com/6848603da8e6ac95794b7498/6894757aa6dd3f84f6e463a2_Anniek%20Bril.webp"
                   alt="Anniek Bril"

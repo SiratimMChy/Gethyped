@@ -85,7 +85,7 @@ const ExpertiseButton = ({ expertise }) => {
   return (
     <Motion.a
       href={expertise.link}
-      className={`inline-flex items-center px-4 py-2 rounded-lg font-bold cursor-pointer select-none origin-center ${
+      className={`inline-flex items-center px-4 py-2.5 md:px-6 md:py-3 rounded-[12px] md:rounded-lg font-bold cursor-pointer select-none origin-center ${
         expertise.id === 1 
           ? 'bg-orange-500 text-white' 
           : expertise.id === 2
@@ -104,9 +104,9 @@ const ExpertiseButton = ({ expertise }) => {
       initial="idle"
     >
       <span className="relative z-10 flex items-center gap-3">
-        <span>Meer over {expertise.title.toLowerCase()}</span>
+        <span className="text-[14px]">Meer over {expertise.title.toLowerCase()}</span>
         <Motion.div
-          className="rounded-lg p-2 flex items-center justify-center"
+          className="rounded-[10px] md:rounded-lg p-2 flex items-center justify-center"
           variants={iconVariants}
           animate={state}
           initial="idle"
@@ -149,75 +149,67 @@ const ExpertiseCard = ({ expertise, index }) => {
             backgroundColor: expertise.theme,
             top: `calc(10% + ${index * 20}px)`
         }}
-        className="relative w-full rounded-2xl shadow-2xl overflow-hidden p-8 md:p-20">
-        <div className="relative min-h-96 md:min-h-[420px]">
+        className="relative w-full rounded-[32px] shadow-xl overflow-hidden px-7 pt-10 pb-8 md:p-20">
+        <div className="relative min-h-[500px] md:min-h-[420px] flex flex-col h-full z-20">
           {/* Large background number */}
-          <div className={`absolute z-10 ${
+          <div className={`absolute z-0 ${
             expertise.id === 1 
-              ? '-top-8 right-4' 
+              ? '-top-6 -right-2 md:-top-8 md:right-4' 
               : expertise.id === 3
-              ? '-top-8 right-4'
+              ? '-top-6 -right-2 md:-top-8 md:right-4'
               : expertise.id === 4
-              ? '-top-18 right-4'
-              : '-top-16 right-2'
+              ? '-top-6 -right-2 md:-top-18 md:right-4'
+              : '-top-6 -right-2 md:-top-16 md:right-2'
           }`}>
-            <span className={`text-[60px] md:text-[120px] font-black leading-none ${
+            <span className={`text-[120px] font-black leading-[0.8] tracking-tighter ${
               expertise.id === 1 
-                ? 'text-gray-300' 
+                ? 'text-gray-800/10 md:text-gray-300' 
                 : 'text-white/20'
             }`}>{expertise.number}</span>
           </div>
 
           {/* Content Layout */}
-          <div className="relative z-20 flex flex-col md:flex-row justify-between items-start h-full">
-            {/* Left Content */}
-            <div className="flex-1 max-w-lg">
-              {/* Label */}
-              <div className={`inline-block px-4 py-2 rounded-lg mb-6 ${
-                expertise.id === 1 
-                  ? 'bg-gray-200' 
-                  : 'bg-white'
-              }`}>
-                <p className={`text-lg font-semibold ${
-                  expertise.id === 1 
-                    ? 'text-black' 
-                    : 'text-black'
-                }`}>Expertise</p>
+          <div className="relative z-20 flex flex-col md:flex-row justify-between items-start h-full flex-1">
+            {/* Left Content Container */}
+            <div className="flex flex-col w-full md:max-w-lg h-full">
+              
+              {/* Top: Label and Title */}
+              <div className="mb-0 md:mb-0">
+                <div className={`inline-block px-3 py-1 md:px-4 md:py-2 rounded-[6px] mb-2 md:mb-6 ${
+                  expertise.id === 1 ? 'bg-gray-200' : 'bg-white'
+                }`}>
+                  <p className={`text-[13px] md:text-lg font-bold md:font-bold ${
+                    expertise.id === 1 ? 'text-black' : 'text-black'
+                  }`}>Expertise</p>
+                </div>
+                <h2 className="text-[40px] md:text-7xl font-black mb-1.5 md:mb-15 text-black leading-none tracking-tighter md:leading-tight break-words md:whitespace-nowrap">{expertise.title}</h2>
               </div>
 
-              {/* Title */}
-              <h2 className="text-6xl md:text-7xl font-bold mb-15 text-black leading-tight whitespace-nowrap">{expertise.title}</h2>
-
-              {/* Subtitle */}
-              <h4 className="text-3xl font-semibold mb-6 text-black">{expertise.subtitle}</h4>
-
-              {/* Description */}
-              <p className="mb-8 text-black/85 max-w-md text-xl font-semibold ">{expertise.description}</p>
-
-              {/* Button */}
-              <ExpertiseButton expertise={expertise} />
-            </div>
-
-            {/* Right Video - positioned in bottom right */}
-            <div className="relative mt-6 md:mt-0 md:absolute md:-bottom-4 md:right-12  rotate-3">
-              <div className={`w-84 h-110 rounded-2xl overflow-hidden border-8 shadow-lg ${
-                expertise.id === 1 
-                  ? 'border-orange-500' 
-                  : expertise.id === 2
-                  ? 'border-white'
-                  : expertise.id === 3
-                  ? 'border-white'
-                  : 'border-white'
-              }`}>
-                <video
-                  muted
-                  loop
-                  autoPlay
-                  playsInline
-                  className="w-full h-full object-cover"
-                  src={expertise.videoSrc}
-                />
+              {/* Middle: Video on Mobile, positioned absolute on Desktop */}
+              <div className="relative md:absolute md:-bottom-4 md:right-12 mb-auto md:mb-0 transform rotate-[4deg] md:rotate-3 origin-center self-start md:self-auto mt-3">
+                <div className={`w-[185px] h-[210px] md:w-84 md:h-110 rounded-[20px] md:rounded-2xl overflow-hidden border-[6px] md:border-8 shadow-md ${
+                  expertise.id === 1 ? 'border-orange-500' : 'border-white'
+                }`}>
+                  <video
+                    muted
+                    loop
+                    autoPlay
+                    playsInline
+                    className="w-full h-full object-cover scale-[1.05]"
+                    src={expertise.videoSrc}
+                  />
+                </div>
               </div>
+
+              {/* Bottom: Subtitle, Description, Button */}
+              <div className="mt-10 md:mt-auto pt-2 md:pt-0">
+                <h4 className="text-[17px] md:text-3xl font-bold mb-1 md:mb-6 text-black pr-2 md:pr-0 tracking-tight leading-tight">{expertise.subtitle}</h4>
+                <p className="mb-4 md:mb-8 text-black/90 text-[14px] md:text-xl font-normal md:font-semibold pr-8 md:pr-0 max-w-[260px] md:max-w-md leading-[1.35]">{expertise.description}</p>
+                <div className="pb-0 md:pb-0">
+                  <ExpertiseButton expertise={expertise} />
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
