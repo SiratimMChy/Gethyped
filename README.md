@@ -1,8 +1,6 @@
 # GetHyped - Social Content Agency Website
 
-Modern React application for GetHyped social-first content agency.
-
-**Rebuilt by Siratim Mustakim Chowdhury**  
+Modern React application for GetHyped social-first content agency. 
 *Development Cycle: April 14 – April 20, 2026*
 
 ## 🚀 Technology Stack
