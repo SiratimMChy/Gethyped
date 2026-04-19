@@ -73,8 +73,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 300px;
-  height: 300px;
+  width: 380px;
+  height: 380px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
@@ -86,8 +86,8 @@
 
 @media (max-width: 768px) {
   .client-card {
-    width: 140px;
-    height: 140px;
+    width: 180px;
+    height: 180px;
     padding: 1.25rem;
   }
   
@@ -142,6 +142,53 @@
 .expertise-content {
   transform-style: preserve-3d;
   perspective: 1000px;
+}
+
+/* Mobile-specific animations for expertise cards */
+@media (max-width: 479px) {
+  .expertise-content {
+    transition: transform 0.3s ease-in, opacity 0.3s ease-in-out;
+  }
+  
+  .expertise-slide:not(:last-child) .expertise-content {
+    will-change: transform, opacity;
+  }
+}
+
+/* Mobile Portrait - 320px to 479px */
+@media (max-width: 479px) {
+  .expertise-wrap {
+    padding: 0 1rem;
+  }
+  
+  .expertise-content {
+    transform-origin: center center;
+  }
+}
+
+/* Mobile Landscape - 425px */
+@media (max-width: 425px) {
+  .expertise-content {
+    perspective: 800px;
+  }
+}
+
+/* Mobile Portrait - 375px */
+@media (max-width: 375px) {
+  .expertise-content {
+    perspective: 600px;
+  }
+}
+
+/* Mobile Portrait - 320px */
+@media (max-width: 320px) {
+  .expertise-content {
+    perspective: 500px;
+  }
+  
+  .expertise-wrap {
+    padding: 0 0.75rem;
+  }
 }
 
 @media (max-width: 768px) {

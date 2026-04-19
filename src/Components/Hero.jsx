@@ -15,11 +15,18 @@ const Hero = () => {
   };
 
   return (
-    <section className="bg-[#f5f0e8] md:px-16 pt-16 pb-4 md:pb-32 overflow-hidden relative z-0 md:min-h-[90vh]">
+    <section className="bg-[#f5f0e8] md:px-16 pt-24 md:pt-40 pb-4 md:pb-32 overflow-hidden relative z-0 md:min-h-[90vh]">
       {/* Search/Headline Text */}
       <div className="max-w-5xl mb-4 px-2 md:px-0">
-        <h1 className="text-[2.5rem] md:text-[6rem] font-bold text-black leading-[0.9] tracking-[-0.03em]">
-          Get Hyped.<br />Get Noticed.<br />Get Results.
+        <h1 className="text-[2.5rem] md:text-[6.4rem] font-semibold md:font-bold text-black leading-[0.95] tracking-[-0.05em]">
+          {/* Mobile: Breaks on every sentence */}
+          <span className="md:hidden">
+            Get Hyped.<br />Get Noticed.<br />Get Results.
+          </span>
+          {/* Desktop: Breaks after the second 'Get' naturally or via specific span */}
+          <span className="hidden md:inline">
+            Get Hyped. Get <br /> Noticed. Get Results. 
+          </span>
         </h1>
         <p className="mt-6 text-sm md:text-xl text-black font-medium max-w-xs leading-[1.3]">
           Klaar met gokken op content<br className="md:hidden" /> die niets oplevert?

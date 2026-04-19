@@ -27,7 +27,7 @@ const Clients = () => {
 
     const content = containerRef.current;
     const originalCards = Array.from(content.children);
-    
+
     // Duplicate all cards for infinite scroll effect
     originalCards.forEach(card => {
       const clone = card.cloneNode(true);
@@ -106,7 +106,7 @@ const Clients = () => {
               </div>
             </div>
             <div className="mwg_effect008 overflow-hidden">
-              <div 
+              <div
                 ref={containerRef}
                 className="container is-clients-marquee flex gap-[1vw] w-max select-none cursor-grab active:cursor-grabbing"
                 style={{ whiteSpace: 'nowrap', padding: '0 1vw 0 0' }}

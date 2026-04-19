@@ -93,30 +93,33 @@ const Footer = () => {
 
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const distance = Math.hypot(
-      x - lastMousePos.current.x,
-      y - lastMousePos.current.y
-    );
+    const clientX = e.clientX - rect.left;
+    const clientY = e.clientY - rect.top;
+    const dx = clientX - lastMousePos.current.x;
+    const dy = clientY - lastMousePos.current.y;
+    const distance = Math.hypot(dx, dy);
 
-    if (distance > 120) {
+    if (distance > 300) {
+      const id = Date.now();
+      const xOffset = 180;
+      const yOffset = 60;
+
       const newImg = {
-        id: Date.now(),
+        id,
         src: images[Math.floor(Math.random() * images.length)],
-        x,
-        y,
-        rotation: Math.random() * 24 - 12,
+        x: clientX,
+        y: clientY,
+        rotation: Math.random() * 30 - 15,
+        targetX: clientX + (dx > 0 ? xOffset : -xOffset),
+        targetY: clientY + (dy > 0 ? yOffset : -yOffset),
       };
 
-      setFloatingImages((prev) => [...prev.slice(-9), newImg]);
-      lastMousePos.current = { x, y };
+      setFloatingImages((prev) => [...prev.slice(-6), newImg]);
+      lastMousePos.current = { x: clientX, y: clientY };
 
       setTimeout(() => {
-        setFloatingImages((prev) =>
-          prev.filter((img) => img.id !== newImg.id)
-        );
-      }, 1200);
+        setFloatingImages((prev) => prev.filter((img) => img.id !== id));
+      }, 1500);
     }
   };
 
@@ -134,36 +137,24 @@ const Footer = () => {
         {floatingImages.map((img) => (
           <Motion.div
             key={img.id}
-            initial={{
-              opacity: 0,
-              scale: 0.3,
-              rotate: img.rotation - 10,
-              y: 20,
+            initial={{ opacity: 0, scale: 0.2, left: img.x, top: img.y, rotate: img.rotation - 10, x: "-50%", y: "-50%" }}
+            animate={{ 
+              opacity: 1, 
+              scale: 1, 
+              left: img.targetX, 
+              top: img.targetY, 
+              rotate: img.rotation, 
+              transition: { 
+                left: { type: "spring", stiffness: 35, damping: 12 }, 
+                top: { type: "spring", stiffness: 35, damping: 12 }, 
+                opacity: { duration: 0.6 } 
+              } 
             }}
-            animate={{
-              opacity: 1,
-              scale: 1,
-              rotate: img.rotation,
-              y: 0,
-              transition: {
-                type: "spring",
-                stiffness: 150,
-                damping: 15,
-              },
-            }}
-            exit={{
-              opacity: 0,
-              scale: 0.5,
-              rotate: img.rotation + 5,
-              transition: { duration: 0.4, ease: "easeInOut" },
-            }}
+            exit={{ opacity: 0, scale: 0, transition: { duration: 0.4, delay: 0.5 } }}
             style={{
               position: "absolute",
-              left: img.x,
-              top: img.y,
-              transform: "translate(-50%, -50%)",
               pointerEvents: "none",
-              zIndex: 15,
+              zIndex: 5,
             }}
           >
             <img
@@ -254,20 +245,21 @@ const Footer = () => {
       <div className="relative z-10 w-full overflow-hidden flex items-end py-2 px-4 lg:px-12 lg:pb-8 pb-8 -mt-16 lg:-mt-32">
         <div className="relative w-full h-auto flex flex-col lg:flex-row items-center lg:items-end justify-center lg:justify-between pointer-events-auto">
           <div
-            className="absolute inset-0 bg-[#EBE7DF]"
+            className="absolute inset-x-0 top-0 bg-[#EBE7DF]"
             style={{
               borderTopLeftRadius: '10px',
               borderTopRightRadius: '30px',
               transform: 'skewY(-10deg)',
               transformOrigin: 'top right',
               width: '100%',
-              bottom: '-100px'
+              minHeight: '200%',
+              bottom: '-1200px'
             }}
           ></div>
 
           <div className="relative pt-0 lg:pt-0 -mt-8 min-[375px]:-mt-7 min-[425px]:-mt-4.5 md:-mt-0 lg:mt-auto lg:-mb-14 w-full lg:w-auto lg:shrink-0 lg:self-end flex justify-center lg:justify-start lg:pl-0.5 origin-center lg:origin-bottom-left" style={{ transform: 'rotateX(4deg) rotateY(-10deg) rotateZ(1deg)' }}>
-            <div className="flex justify-center lg:justify-start items-center lg:items-end py-1 px-2 lg:px-0 z-10 w-full lg:w-auto overflow-visible">
-              <div className="transform origin-center lg:origin-left scale-[1.08] min-[375px]:scale-[1.18] min-[425px]:scale-[1.35] md:scale-[1.75] lg:scale-[1.45] flex justify-center lg:justify-start w-full lg:w-auto ml-0 items-center lg:items-end">
+            <div className="flex justify-center lg:justify-start items-center lg:items-end py-1 md:pt-2 lg:pt-4 md:pb-0 lg:pb-0 px-2 lg:px-0 z-10 w-full lg:w-auto overflow-visible">
+              <div className="transform origin-center lg:origin-left scale-[1.08] min-[375px]:scale-[1.18] min-[425px]:scale-[1.35] md:scale-[1.75] lg:scale-[1.05] flex justify-center lg:justify-start w-full lg:w-auto ml-0 items-center lg:items-end">
                 <Logo width={300} height={200} />
               </div>
             </div>
