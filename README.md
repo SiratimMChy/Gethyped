@@ -1,4 +1,4 @@
-# GetHyped - Social-First Content Agency Website
+# GetHyped
 
 A modern, interactive website for GetHyped, a social-first content agency specializing in short-form video content and strategic social media solutions.
 
