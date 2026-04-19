@@ -225,12 +225,14 @@ const Expertises = () => {
     const cards = cardsRef.current;
     if (!cards || cards.length === 0) return;
 
+    const isMobile = window.innerWidth < 768;
+    
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
         start: "top top",
-        end: "+=3500",
-        scrub: 0.5,
+        end: isMobile ? "+=900" : "+=1600",
+        scrub: isMobile ? 0.1 : 0.2,
         pin: true,
       },
     });

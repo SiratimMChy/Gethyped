@@ -3,6 +3,8 @@ import Lenis from '@studio-freight/lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+gsap.registerPlugin(ScrollTrigger);
+
 /**
  * LenisProvider Component
  * Integrates Lenis for momentum-based smooth scrolling.
@@ -12,12 +14,12 @@ const LenisProvider = ({ children }) => {
   useEffect(() => {
     // Initialize Lenis
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 0.9,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 0.8, // Slightly softer feel
+      wheelMultiplier: 0.8, 
       touchMultiplier: 2,
       infinite: false,
     });
