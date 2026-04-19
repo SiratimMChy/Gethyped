@@ -9,10 +9,12 @@ Modern React application for GetHyped social-first content agency.
 - **Build Tool**: Vite 8.0.4  
 - **Styling**: Tailwind CSS 4.2.2
 - **Animations**: Framer Motion 12.38.0, GSAP 3.15.0
+- **Smooth Scroll**: Lenis 1.0.42
 - **Icons**: React Icons 5.6.0
 
 ## ✨ Key Features
 
+- **Smooth Momentum Scrolling** - Professional LenisProvider-integrated scroll experience
 - **Interactive Hero Section** - Dynamic card animations with hover effects
 - **Smart Navigation** - Scroll-responsive navbar with smooth transitions  
 - **Expertise Showcase** - GSAP-powered stacking card animations
