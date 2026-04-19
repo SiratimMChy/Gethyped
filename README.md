@@ -1,46 +1,60 @@
 # GetHyped - Social Content Agency Website
 
-React website for GetHyped content agency.
+Modern React application for GetHyped social-first content agency.
 
-**Developed by Siratim Mustakim Chowdhury**  
-*April 14-18, 2026*
+**Rebuilt by Siratim Mustakim Chowdhury**  
+*Development Cycle: April 14 – April 20, 2026*
 
-## Tech Stack
+## 🚀 Technology Stack
 
-- React 19.2.4
-- Vite 8.0.4  
-- Tailwind CSS 4.2.2
-- Framer Motion 12.38.0
-- GSAP 3.15.0
-- React Icons 5.6.0
+- **Frontend**: React 19.2.4
+- **Build Tool**: Vite 8.0.4  
+- **Styling**: Tailwind CSS 4.2.2
+- **Animations**: Framer Motion 12.38.0, GSAP 3.15.0
+- **Icons**: React Icons 5.6.0
 
-## Features
+## ✨ Key Features
 
-- Hero section with interactive cards
-- Navigation with scroll effects
-- Expertise cards with GSAP stacking animation
-- Client logos with infinite scroll
-- Work portfolio with hover effects
-- Responsive design
+- **Interactive Hero Section** - Dynamic card animations with hover effects
+- **Smart Navigation** - Scroll-responsive navbar with smooth transitions  
+- **Expertise Showcase** - GSAP-powered stacking card animations
+- **Client Portfolio** - Infinite scroll marquee with drag interactions
+- **Work Gallery** - 3D transforms with mouse tracking effects
+- **Responsive Design** - Mobile-first approach with optimized breakpoints
 
-## Setup
+## 🛠️ Development
 
 ```bash
+# Install dependencies
 npm install
+
+# Start development server
 npm run dev
+
+# Production build
 npm run build
+
+# Preview build
+npm run preview
 ```
 
-## Components
+## 📱 Technical Implementation
 
-- Navbar - Navigation with animations
-- Hero - Interactive card section
-- Intro - Introduction section
-- Expertises - GSAP animated cards
-- SelectedWork - Portfolio showcase
-- Clients - Logo marquee
-- Footer - Contact information
+- **Component Architecture** - Modular React component structure
+- **Animation Performance** - Hardware-accelerated transforms
+- **Responsive Breakpoints** - Mobile (320px+), Tablet (768px+), Desktop (1024px+)
+- **Code Quality** - ESLint configuration with modern standards
+
+## 🎯 Project Structure
+
+- **Navbar** - Navigation with scroll animations
+- **Hero** - Interactive card showcase
+- **Intro** - Introduction section
+- **Expertises** - GSAP animated stacking cards
+- **SelectedWork** - Portfolio with 3D effects
+- **Clients** - Animated logo marquee
+- **Footer** - Contact information
 
 ---
 
-**© 2026 GetHyped**
+**© 2026 GetHyped. All rights reserved.**
