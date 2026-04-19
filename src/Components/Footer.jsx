@@ -257,7 +257,7 @@ const Footer = () => {
             }}
           ></div>
 
-          <div className="relative pt-0 lg:pt-0 -mt-8 min-[375px]:-mt-7 min-[425px]:-mt-4.5 md:-mt-0 lg:mt-auto lg:-mb-14 w-full lg:w-auto lg:shrink-0 lg:self-end flex justify-center lg:justify-start lg:pl-0.5 origin-center lg:origin-bottom-left" style={{ transform: 'rotateX(4deg) rotateY(-10deg) rotateZ(1deg)' }}>
+          <div className="relative pt-0 lg:pt-0 -mt-8 min-[375px]:-mt-7 min-[425px]:-mt-4.5 md:-mt-0 lg:mt-auto lg:-mb-18 w-full lg:w-auto lg:shrink-0 lg:self-end flex justify-center lg:justify-start lg:pl-0.5 origin-center lg:origin-bottom-left" style={{ transform: 'rotateX(4deg) rotateY(-10deg) rotateZ(1deg)' }}>
             <div className="flex justify-center lg:justify-start items-center lg:items-end py-1 md:pt-2 lg:pt-4 md:pb-0 lg:pb-0 px-2 lg:px-0 z-10 w-full lg:w-auto overflow-visible">
               <div className="transform origin-center lg:origin-left scale-[1.08] min-[375px]:scale-[1.18] min-[425px]:scale-[1.35] md:scale-[1.75] lg:scale-[1.05] flex justify-center lg:justify-start w-full lg:w-auto ml-0 items-center lg:items-end">
                 <Logo width={300} height={200} />

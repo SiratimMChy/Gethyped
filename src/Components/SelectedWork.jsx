@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion as Motion, useMotionValue, useSpring, useTransform, useScroll } from "framer-motion";
 
-/* ─── Shared Components ───────────────────────────────── */
 
 const JellyButton = ({ href, children }) => {
   const [hovered, setHovered] = React.useState(false);
@@ -9,21 +8,6 @@ const JellyButton = ({ href, children }) => {
 
   const state = active ? 'pressed' : hovered ? 'hover' : 'idle';
 
-  /* Matches Webflow's --bounce-ease and --speed variables exactly */
-  const innerVariants = {
-    idle: { skewY: 0, rotate: 0, scale: 1, transition: { duration: 0.45, ease: [0.34, 1.56, 0.64, 1] } },
-    hover: { skewY: -4, rotate: -1, scale: 1.02, transition: { duration: 0.45, ease: [0.34, 1.56, 0.64, 1] } },
-    pressed: { skewY: 0, rotate: 0, scale: 0.95, transition: { duration: 0.1, ease: 'easeOut' } },
-  };
-
-  /* Matches Webflow's .button-default__icon transition (--speed-faster: 0.15s) */
-  const iconVariants = {
-    idle: { scale: 1, transition: { duration: 0.15, ease: 'easeOut' } },
-    hover: { scale: 0.92, transition: { duration: 0.15, ease: 'easeOut' } },
-    pressed: { scale: 1 },
-  };
-
-  /* Matches Webflow's --border-radius-ease and width shrink on hover */
   const bgVariants = {
     idle: { width: '100%', transition: { duration: 0.45, ease: [0.34, 1.37, 0.64, 1] } },
     hover: { width: 'calc(100% - 0.5em)', transition: { duration: 0.45, ease: [0.34, 1.37, 0.64, 1] } },
@@ -74,8 +58,6 @@ const JellyButton = ({ href, children }) => {
     </Motion.a>
   );
 };
-
-/* ─── Work Card Component ────────────────────────────── */
 
 const WorkCard = ({ work, index }) => {
   const isDown = work.slant === "down";
@@ -276,20 +258,15 @@ const SelectedWork = () => {
           </div>
         </div>
 
-        {/* Row 2: Cards Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 pt-2 md:pt-0 gap-5 md:gap-8 lg:gap-20 items-start max-w-7xl">
-
-          {/* Card 1: Orange (Left) */}
           <div className="lg:mt-18">
             <WorkCard work={workData[0]} index={0} />
           </div>
 
-          {/* Card 2: Blue (Middle) */}
           <div className="lg:-mt-8">
             <WorkCard work={workData[1]} index={1} />
           </div>
 
-          {/* Card 3: Green (Right) */}
           <div className="lg:-mt-32">
             <WorkCard work={workData[2]} index={2} />
           </div>
