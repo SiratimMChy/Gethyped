@@ -102,13 +102,6 @@ src/
 - **Smooth Scrolling**: Enhanced with Lenis smooth scroll
 - **Animation Performance**: Hardware-accelerated animations
 
-## 📱 Responsive Design
-
-The website is fully responsive and optimized for:
-- **Desktop**: 1920px and above
-- **Tablet**: 768px - 1919px
-- **Mobile Landscape**: 480px - 767px
-- **Mobile Portrait**: 320px - 479px
 
 ## 🎨 Animation System
 
