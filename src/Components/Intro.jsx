@@ -153,7 +153,7 @@ const Intro = () => {
   }, []);
 
   return (
-    <section id="intro-home" className="section_intro bg-[#FAF4EC] py-6 md:py-32 overflow-hidden">
+    <section id="intro-home" className="section_intro  py-6 md:py-32 overflow-hidden">
       <div className="padding-global max-w-[1440px] mx-auto px-5 md:px-8">
         <div className="container-col-12">
 

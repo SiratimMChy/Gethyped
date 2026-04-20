@@ -13,7 +13,7 @@ const expertisesData = [
     subtitle: 'Slimme strategie. Sterke start.',
     description: 'We duiken diep in jouw merk, doelgroep en doelen. En vertalen data naar een duidelijk plan met formats die écht impact maken. Zo weet je precies waarom het werkt.',
     videoSrc: 'https://gethyped.b-cdn.net/MD/MD%20Loop%20Schaken.mp4',
-    theme: '#f0ede6',
+    theme: '#ffffff',
     link: '/expertises/social-strategie'
   },
   {
@@ -23,7 +23,7 @@ const expertisesData = [
     subtitle: 'Content die opvalt en raakt.',
     description: 'We maken content die opvalt. Blijft hangen. En jouw doelgroep raakt. Creatief, snel en energiek. Altijd met het doel voor ogen.',
     videoSrc: 'https://gethyped.b-cdn.net/Expertises/Loop%20BTS%20comp.mp4',
-    theme: '#e6c8f0',
+    theme: '#f5a6f5',
     link: '/expertises/content-creatie'
   },
   {
@@ -33,7 +33,7 @@ const expertisesData = [
     subtitle: 'Zichtbaar waar en wanneer het telt.',
     description: 'De juiste content verdient het om gezien te worden. We verspreiden de content waar jouw doelgroep is. Zo raakt jouw merk de juiste mensen, precies waar en wanneer het telt.',
     videoSrc: 'https://gethyped.b-cdn.net/Over%20de%20Top/overdetop-loop.mp4',
-    theme: '#4ade80',
+    theme: '#39c293',
     link: '/expertises/activatie'
   },
   {
@@ -140,7 +140,7 @@ const ExpertiseCard = React.forwardRef(({ expertise, index }, ref) => {
   return (
     <div
       ref={ref}
-      className="absolute inset-0 flex items-center justify-center p-4 md:p-8"
+      className="absolute inset-0 flex items-center justify-center p-4 md:p-4"
       style={{ zIndex: index }}
     >
       <div
@@ -148,9 +148,9 @@ const ExpertiseCard = React.forwardRef(({ expertise, index }, ref) => {
           backgroundColor: expertise.theme,
           color: expertise.id === 1 ? 'black' : (expertise.id === 4 ? 'white' : 'black')
         }}
-        className="relative w-full rounded-xl shadow-xl overflow-hidden px-6 md:px-10 pt-10 pb-8 lg:p-20"
+        className="relative w-full rounded-4xl shadow-xl overflow-hidden px-6 md:px-10 pt-10 pb-8 lg:px-20 lg:py-14"
       >
-        <div className="relative min-h-[440px] md:min-h-[400px] lg:min-h-[480px] flex flex-col h-full z-20">
+        <div className="relative min-h-[440px] md:min-h-[380px] lg:min-h-[460px] flex flex-col h-full z-20">
           {/* Content Layout */}
           <div className="relative z-20 flex flex-col h-full flex-1">
 
@@ -167,15 +167,15 @@ const ExpertiseCard = React.forwardRef(({ expertise, index }, ref) => {
                 </h2>
               </div>
 
-              <div className={`relative flex text-[60px] md:text-[120px] font-black leading-[0.8] tracking-tighter ${expertise.id === 1
+              <div className={`relative flex text-[60px] md:text-[120px] font-semibold leading-[0.8] tracking-tighter ${expertise.id === 1
                 ? 'text-gray-800/10 md:text-gray-300'
                 : 'text-white/20'
                 } ${expertise.id === 1
-                  ? 'relative -top-6 -right-2 md:-top-8 md:right-4'
+                  ? 'relative -top-4 -right-2 md:-top-2 md:right-4'
                   : expertise.id === 2
                     ? 'relative -top-6 -right-2 md:-top-8 md:right-2'
                     : expertise.id === 3
-                      ? 'relative -top-6 -right-2 md:-top-8 md:right-4'
+                      ? 'relative -top-6 -right-2 md:-top-2 md:right-4'
                       : 'relative -top-6 md:-top-8 md:right-4'
                 }`}>
                 <span>0</span>
@@ -184,7 +184,7 @@ const ExpertiseCard = React.forwardRef(({ expertise, index }, ref) => {
             </div>
 
             <div className="relative md:absolute md:-bottom-4 md:-right-2 lg:right-[2%] transform rotate-3 origin-center self-start md:self-auto mt-2 md:mt-0 mb-4 md:mb-0 z-10">
-              <div className={`w-[130px] h-[160px] md:w-[260px] md:h-[340px] lg:w-[360px] lg:h-[460px] rounded-[14px] md:rounded-2xl overflow-hidden border-[5px] md:border-8 shadow-md ${expertise.id === 1 ? 'border-orange-500' : 'border-white'
+              <div className={`w-[130px] h-[160px] md:w-[240px] md:h-[320px] lg:w-[330px] lg:h-[460px] rounded-[20px] md:rounded-[32px] overflow-hidden border-[5px] md:border-8 shadow-md ${expertise.id === 1 ? 'border-orange-500' : 'border-white'
                 }`}>
                 <video
                   muted
@@ -250,7 +250,7 @@ const Expertises = () => {
         tl.to(cards[index], {
           scale: 0.85,
           yPercent: -10,
-          opacity: 0.5,
+          opacity: 1,
           duration: 1,
           ease: "power2.inOut"
         }, index)
@@ -271,8 +271,8 @@ const Expertises = () => {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative h-screen w-full overflow-hidden bg-white">
-      <div className="relative w-full h-full flex items-center justify-center max-w-[85rem] mx-auto px-2 md:px-10">
+    <section ref={containerRef} className="relative h-screen w-full overflow-hidden pt-2 md:pt-0">
+      <div className="relative w-full h-full flex items-center justify-center max-w-[1440px] mx-auto px-2 md:px-10">
         {expertisesData.map((expertise, index) => (
           <ExpertiseCard
             key={expertise.id}

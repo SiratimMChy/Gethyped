@@ -11,7 +11,7 @@ import Footer from './Components/Footer';
 const App = () => {
   return (
     <LenisProvider>
-      <div className="min-h-screen bg-[#f6f2e9]">
+      <div className="min-h-screen bg-[#f5f0e8]">
         <Navbar />
         <Hero />
         <Intro />

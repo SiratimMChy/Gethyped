@@ -189,7 +189,7 @@ const SelectedWork = () => {
 
   return (
     <section id="selected-work" ref={sectionRef} className="section_selected-work bg-[#FAF4EC] py-14 md:py-24 lg:py-32 px-5 md:px-6 overflow-hidden">
-      <div className="max-w-7xl md:px-20 mx-auto">
+      <div className="max-w-[1320px] md:px-16 mx-auto">
 
         {/* Header Block */}
         <div className="mb-10 md:mb-20 md:pl-8 md:w-1/2">
@@ -211,10 +211,10 @@ const SelectedWork = () => {
               key={work.id}
               style={{
                 marginBottom: isMobile && index !== workData.length - 1 ? spaceY : 0,
-                rotate: isMobile ? (index === 0 ? 2 : index === 1 ? -2 : 1) : 0,
-                marginTop: !isMobile ? (index === 0 ? '4px' : index === 1 ? '-80px' : '-155px') : '0px'
+                rotate: isMobile ? (index === 0 ? -3 : index === 1 ? 2 : -1.5) : 0,
+                marginTop: !isMobile ? (index === 0 ? '4px' : index === 1 ? '-90px' : '-180px') : '0px'
               }}
-              className="md:!rotate-0 md:!mb-0"
+              className="w-[90%] mx-auto md:w-full md:!rotate-0 md:!mb-0"
             >
               <WorkCard work={work} index={index} isMobile={isMobile} />
             </Motion.div>

@@ -34,7 +34,7 @@ const GetResultsButton = ({ isMobile }) => {
   if (isMobile) {
     return (
       <Motion.button
-        className="bg-[#111111] text-white font-bold py-2 pl-7 pr-2 rounded-2xl text-[18px] flex items-center gap-5 h-[60px] shadow-lg origin-center w-fit"
+        className="bg-[#111111] text-white font-bold py-1.5 pl-5 pr-1.5 rounded-xl text-[15px] flex items-center gap-3 h-[48px] shadow-lg origin-center w-fit"
         style={{ WebkitTapHighlightColor: 'transparent' }}
         onHoverStart={() => setHovered(true)}
         onHoverEnd={() => { setHovered(false); setActive(false); }}
@@ -48,7 +48,7 @@ const GetResultsButton = ({ isMobile }) => {
       >
         <span className="tracking-tight">Get Results</span>
         <Motion.span
-          className="bg-white rounded-[14px] w-[44px] h-[44px] flex items-center justify-center text-2xl shadow-inner"
+          className="bg-white rounded-[10px] w-[34px] h-[34px] flex items-center justify-center text-lg shadow-inner"
           variants={iconVariants}
         >
           🔥
@@ -59,7 +59,7 @@ const GetResultsButton = ({ isMobile }) => {
 
   return (
     <Motion.button
-      className="flex items-center gap-2 px-7 py-3 rounded-2xl text-base font-bold bg-[#f5c6e0] border border-[#f0aed4] origin-center"
+      className="flex items-center  gap-2 px-3 py-1 rounded-xl text-base font-bold bg-[#f5c6e0] border border-[#f0aed4] origin-center"
       style={{ WebkitTapHighlightColor: 'transparent' }}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => { setHovered(false); setActive(false); }}
@@ -71,7 +71,7 @@ const GetResultsButton = ({ isMobile }) => {
     >
       <span>Get Results</span>
       <Motion.span
-        className="bg-white rounded-lg w-8 h-8 flex items-center justify-center text-base origin-center"
+        className="bg-white rounded-lg w-10 h-10 flex items-center justify-center text-base origin-center"
         variants={iconVariants}
       >
         🔥
@@ -94,7 +94,7 @@ const NavItem = ({ href, children, isMobile, onClick }) => {
         <a
           href={href}
           onClick={onClick}
-          className="bg-white text-black font-bold py-2.5 px-6 rounded-lg text-[18px] block text-center shadow-sm active:scale-95 transition-transform"
+          className="bg-white text-black font-bold py-2.5 px-6 rounded-2xl text-[18px] block text-center shadow-sm active:scale-95 transition-transform"
         >
           {children}
         </a>
@@ -108,26 +108,26 @@ const NavItem = ({ href, children, isMobile, onClick }) => {
         href={href}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className="relative px-6 py-2.5 rounded-xl block overflow-hidden text-base font-bold transition-all duration-300"
+        className="relative px-3 py-1.5 rounded-xl block overflow-hidden text-base font-bold transition-all duration-300"
       >
         {/* Orange layer — slides in from top */}
         <Motion.span
-          className="absolute inset-0 rounded-xl"
+          className="absolute inset-0 rounded-lg"
           style={{ background: '#ff5f1f', originY: 1 }}
           initial={{ scaleY: 0 }}
           animate={{ scaleY: hovered ? 1 : 0 }}
           transition={{ duration: 0.2, ease: 'easeInOut' }}
         />
-        {/* Black layer — slides in from bottom, slightly delayed */}
+        {/* Black layer*/}
         <Motion.span
-          className="absolute inset-0 rounded-xl"
+          className="absolute inset-0 rounded-lg"
           style={{ background: '#000', originY: 1 }}
           initial={{ scaleY: 0 }}
           animate={{ scaleY: hovered ? 1 : 0 }}
           transition={{ duration: 0.2, ease: 'easeInOut', delay: 0.08 }}
         />
         <span
-          className="relative z-10 overflow-hidden flex items-center h-5"
+          className="relative z-10 overflow-hidden flex items-center"
           style={{ color: hovered ? 'white' : '#374151' }}
         >
           {/* Original text — slides out upward on hover */}
@@ -207,7 +207,7 @@ const Navbar = () => {
         </a>
 
         {/* Desktop Links */}
-        <ul className="hidden lg:flex items-center gap-1 border border-gray-200 rounded-2xl px-3 py-2 bg-white shadow-sm">
+        <ul className="hidden lg:flex items-center gap-1 border border-gray-200 rounded-xl px-2 py-1 bg-white shadow-sm">
           <NavItem href="#expertises">Expertises</NavItem>
           <NavItem href="#work">Work</NavItem>
           <NavItem href="#about">About</NavItem>
@@ -250,7 +250,7 @@ const Navbar = () => {
 
               {/* Link List */}
               <div className="flex-1 flex flex-col items-center justify-center gap-6">
-                <ul className="flex flex-col items-center gap-5">
+                <ul className="flex flex-col items-center gap-1">
                   <NavItem href="#expertises" isMobile onClick={() => setIsMenuOpen(false)}>Expertises</NavItem>
                   <NavItem href="#work" isMobile onClick={() => setIsMenuOpen(false)}>Work</NavItem>
                   <NavItem href="#about" isMobile onClick={() => setIsMenuOpen(false)}>About</NavItem>
