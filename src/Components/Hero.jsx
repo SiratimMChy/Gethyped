@@ -1,8 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion as Motion } from 'framer-motion';
 
 const Hero = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
+  const [randomRotations, setRandomRotations] = useState({ card1: -6, card2: 3 });
+
+  useEffect(() => {
+    const isMobile = window.innerWidth < 768;
+    if (isMobile) {
+      setRandomRotations({
+        card1: Math.floor(Math.random() * 21) - 10, // -10 to 10 deg
+        card2: Math.floor(Math.random() * 21) - 10, // -10 to 10 deg
+      });
+    }
+  }, []);
 
   const getXShift = (cardIndex) => {
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
@@ -19,11 +30,11 @@ const Hero = () => {
       {/* Search/Headline Text */}
       <div className="max-w-5xl mb-4 px-2 md:px-0">
         <h1 className="text-[2.5rem] md:text-[6.4rem] font-semibold md:font-bold text-black leading-[0.95] tracking-[-0.05em]">
-          {/* Mobile: Breaks on every sentence */}
+          {/* Mobile */}
           <span className="md:hidden">
             Get Hyped.<br />Get Noticed.<br />Get Results.
           </span>
-          {/* Desktop: Breaks after the second 'Get' naturally or via specific span */}
+          {/* Desktop*/}
           <span className="hidden md:inline">
             Get Hyped. Get <br /> Noticed. Get Results. 
           </span>
@@ -41,14 +52,14 @@ const Hero = () => {
           onMouseEnter={() => setHoveredCard(1)}
           onMouseLeave={() => setHoveredCard(null)}
           className="shrink-0 relative block"
-          style={{ marginBottom: '6px' }}
+          style={{ marginBottom: '-6px' }}
           initial={{ opacity: 0, y: 60 }}
           transition={{ type: 'spring', stiffness: 200, damping: 20 }}
           animate={{
             opacity: 1,
             y: 0,
             x: getXShift(1),
-            rotate: hoveredCard === 1 ? 0 : -6,
+            rotate: hoveredCard === 1 ? 0 : randomRotations.card1,
             scale: hoveredCard === 1 ? 1.08 : 1,
             zIndex: hoveredCard === 1 ? 50 : 4,
           }}
@@ -85,7 +96,7 @@ const Hero = () => {
             opacity: 1,
             y: 0,
             x: getXShift(2),
-            rotate: hoveredCard === 2 ? 0 : 3,
+            rotate: hoveredCard === 2 ? 0 : randomRotations.card2,
             scale: hoveredCard === 2 ? 1.08 : 1,
             zIndex: hoveredCard === 2 ? 50 : 3,
           }}
