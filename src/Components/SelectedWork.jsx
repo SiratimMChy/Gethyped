@@ -1,222 +1,140 @@
-import React from 'react';
-import { motion as Motion, useMotionValue, useSpring, useTransform, useScroll } from "framer-motion";
+import React, { useState, useEffect, useRef } from 'react';
+import { motion as Motion, useMotionValue, useSpring, useTransform, useScroll, AnimatePresence } from "framer-motion";
+import { FiArrowRight, FiArrowUpRight } from 'react-icons/fi';
 
+const BOUNCE_EASE = [0.34, 1.56, 0.64, 1];
 
 const JellyButton = ({ href, children }) => {
-  const [hovered, setHovered] = React.useState(false);
-  const [active, setActive] = React.useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [active, setActive] = useState(false);
 
   const state = active ? 'pressed' : hovered ? 'hover' : 'idle';
 
-  /* Matches Webflow's --bounce-ease and --speed variables exactly */
   const innerVariants = {
-    idle: { skewY: 0, rotate: 0, scale: 1, transition: { duration: 0.45, ease: [0.34, 1.56, 0.64, 1] } },
-    hover: { skewY: -4, rotate: -1, scale: 1.02, transition: { duration: 0.45, ease: [0.34, 1.56, 0.64, 1] } },
+    idle: { skewY: 0, rotate: 0, scale: 1, transition: { duration: 0.45, ease: BOUNCE_EASE } },
+    hover: {
+      rotate: -4,
+      skewY: -2,
+      scale: 1.02,
+      transition: { type: "spring", stiffness: 300, damping: 12 }
+    },
     pressed: { skewY: 0, rotate: 0, scale: 0.95, transition: { duration: 0.1, ease: 'easeOut' } },
   };
 
-  /* Matches Webflow's .button-default__icon transition (--speed-faster: 0.15s) */
   const iconVariants = {
-    idle: { scale: 1, transition: { duration: 0.15, ease: 'easeOut' } },
-    hover: { scale: 0.92, transition: { duration: 0.15, ease: 'easeOut' } },
-    pressed: { scale: 1 },
-  };
-
-  /* Matches Webflow's --border-radius-ease and width shrink on hover */
-  const bgVariants = {
-    idle: { width: '100%', transition: { duration: 0.45, ease: [0.34, 1.37, 0.64, 1] } },
-    hover: { width: 'calc(100% - 0.5em)', transition: { duration: 0.45, ease: [0.34, 1.37, 0.64, 1] } },
-    pressed: { width: '100%' },
+    initial: { scale: 1, rotate: 0 },
+    hover: {
+      scale: 1,
+      rotate: -8,
+      transition: { type: "spring", stiffness: 400, damping: 10 }
+    }
   };
 
   return (
     <Motion.a
       href={href}
-      className="button-default is-outline relative inline-flex cursor-pointer select-none"
+      className="relative mt-2 group inline-flex items-center gap-3 pl-5 pr-1 py-1 border border-black rounded-[0.7rem] font-bold text-base cursor-pointer bg-transparent overflow-hidden select-none"
       style={{ WebkitTapHighlightColor: 'transparent' }}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => { setHovered(false); setActive(false); }}
       onMouseDown={() => setActive(true)}
       onMouseUp={() => setActive(false)}
+      variants={innerVariants}
+      animate={state}
+      initial="idle"
     >
-      <Motion.div
-        className="relative flex items-center gap-3 px-5 py-2.5 will-change-transform"
-        variants={innerVariants}
-        animate={state}
-        initial="idle"
+      <Motion.span
+        className="text-black"
+        variants={{ hover: { rotate: -1, transition: { duration: 0.3 } } }}
       >
-        {/* __background — the pill shape that shrinks on hover */}
-        <Motion.span
-          className="absolute inset-0 border border-black pointer-events-none rounded-lg"
-          variants={bgVariants}
-          animate={state}
-          initial="idle"
-        />
-
-        {/* __text */}
-        <span className="relative z-10 font-semibold text-[0.9375rem] tracking-[-0.02em] text-[#131313] leading-none whitespace-nowrap">
-          {children}
-        </span>
-
-        {/* __icon */}
-        <Motion.div
-          className="relative z-10 flex items-center justify-center w-8 h-8 rounded-lg bg-[#131313] text-white shrink-0"
-          variants={iconVariants}
-          animate={state}
-          initial="idle"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" height="14px" viewBox="0 0 22 21" fill="none">
-            <path d="M11.2832 20.9176L9.14509 18.8002L15.5491 12.3962L-0.00939941 12.3962L-0.00939941 9.30322L15.5491 9.30322L9.14509 2.9096L11.2832 0.78186L21.3511 10.8497L11.2832 20.9176Z" fill="currentColor" />
-          </svg>
-        </Motion.div>
+        {children}
+      </Motion.span>
+      <Motion.div
+        className="bg-black text-white rounded-[0.65rem] p-2 flex items-center justify-center"
+        variants={iconVariants}
+      >
+        <FiArrowRight size={18} strokeWidth={2.5} />
       </Motion.div>
     </Motion.a>
   );
 };
 
-const WorkCard = ({ work, index }) => {
-  const isDown = work.slant === "down";
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const smoothX = useSpring(mouseX, { damping: 20, stiffness: 150 });
-  const smoothY = useSpring(mouseY, { damping: 20, stiffness: 150 });
-
-  const rotateXDesktop = useTransform(smoothY, [-1, 1], [4, -4]);
-  const rotateYDesktop = useTransform(smoothX, [-1, 1], [-4, 4]);
-
-  const [isMobile, setIsMobile] = React.useState(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
-
-  React.useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const handleMouseMove = (event) => {
-    if (isMobile) return;
-    const rect = event.currentTarget.getBoundingClientRect();
-    const xPct = (event.clientX - rect.left) / rect.width;
-    const yPct = (event.clientY - rect.top) / rect.height;
-    mouseX.set(xPct * 2 - 1);
-    mouseY.set(yPct * 2 - 1);
-  };
-
-  const handleMouseLeave = () => {
-    if (isMobile) return;
-    mouseX.set(0);
-    mouseY.set(0);
-  };
-
-  const cardRef = React.useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: cardRef,
-    offset: ["start end", "end start"],
-  });
-
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
-
-  const desktopY = useTransform(
-    smoothProgress,
-    [0, 1],
-    [0, index === 0 ? -100 : index === 1 ? -200 : -150]
-  );
-
-  const mobileY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [40, index === 0 ? -20 : index === 1 ? -60 : -100]
-  );
+const WorkCard = ({ work, index, isMobile }) => {
+  const videoRef = useRef(null);
+  const [hovered, setHovered] = useState(false);
 
   return (
-    <Motion.div
-      ref={cardRef}
-      initial={{ opacity: 0, y: 60 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: isMobile ? 0 : index * 0.1 }}
-      viewport={{ once: true, margin: "0px 0px -50px 0px" }}
-      className={`relative cursor-pointer group w-full ${work.className || ''}`}
-      style={{ perspective: 1200 }}
+    <div
+      className="group relative w-full"
+      onMouseEnter={() => {
+        setHovered(true);
+        videoRef.current?.play();
+      }}
+      onMouseLeave={() => {
+        setHovered(false);
+        videoRef.current?.pause();
+        if (videoRef.current) videoRef.current.currentTime = 0;
+      }}
     >
-      <Motion.div
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
+      <div
         style={{
-          rotateX: isMobile ? 0 : rotateXDesktop,
-          rotateY: isMobile ? 0 : rotateYDesktop,
-          rotateZ: isMobile ? (index === 1 ? 1 : index === 2 ? -1 : 0) : 0,
-          y: isMobile ? mobileY : desktopY,
-          transformStyle: "preserve-3d"
+          borderColor: work.hexOverlay,
+          perspective: '1500px',
         }}
-        className={`relative w-full h-87.5 md:h-125 rounded-4xl shadow-xl group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)] transition-shadow duration-500`}
+        className={`relative w-full aspect-[3/4] rounded-[1.52rem] border-[5px] md:border-[7px] bg-white cursor-pointer transition-all duration-700 ease-out overflow-hidden shadow-lg 
+          ${!isMobile ? 'hover:transform-[rotateZ(-4deg)_rotateX(-5deg)_rotateY(-5deg)_scale(1.01)] hover:shadow-2xl' : ''}`}
       >
-        {/* Inner Clipping Container for Video */}
-        <div
-          className={`absolute inset-0 rounded-4xl border-[6px] md:border-8 ${work.borderColor} overflow-hidden bg-gray-900`}
-          style={{ transform: 'translateZ(0)', WebkitMaskImage: '-webkit-radial-gradient(white, black)' }}
-        >
-          <video
-            muted loop autoPlay playsInline
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.33,1,0.68,1)] group-hover:scale-[1.05]"
-            src={work.videoSrc}
-          />
-        </div>
+        <video
+          ref={videoRef}
+          muted loop playsInline
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          src={work.videoSrc}
+        />
 
-        {/* Floating Overlay Content */}
-        <div
-          className="absolute inset-[6px] md:inset-[8px] pointer-events-none p-3 md:p-4 lg:p-5 flex flex-col justify-end"
-          style={{ transform: "translateZ(50px)" }}
-        >
-          <div className="relative w-full h-45 md:h-50">
-            <div className="absolute inset-0 z-0 flex items-end overflow-hidden rounded-3xl" style={{ transform: "translateZ(0)", WebkitMaskImage: '-webkit-radial-gradient(white, black)' }}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="100%"
-                viewBox="0 0 429 174"
-                fill="none"
-                className="w-full h-full"
-                preserveAspectRatio="none"
-                style={{
-                  color: work.hexOverlay,
-                  transform: isDown ? "scaleX(-1)" : "none"
-                }}
-              >
-                <path d="M428.625 35.0943V136.589C428.625 152.326 428.625 167.249 428.625 173.088L1.03513e-06 173.082C-1.56688e-05 170.148 0.000175319 166.808 0.000175319 159.068V77.9695C0.000175319 70.9826 5.03458 65.0132 11.904 63.8674L388.605 1.00885C409.565 -2.47661 428.625 13.7568 428.625 35.0862" fill="currentColor"></path>
-              </svg>
-            </div>
+        {/* Overlay Content with Bubble */}
+        <div className="absolute p-4 inset-x-0 bottom-0 flex flex-col items-end pointer-events-none">
 
-            <div className="relative z-10 w-full h-full pt-16 px-6 pb-6 flex flex-col justify-end">
-              <h3 className="text-white text-[1.25rem] md:text-2xl lg:text-3xl font-bold leading-[1.1] mb-3">
-                {work.title}
-              </h3>
-              <div className="bg-white/20 backdrop-blur-sm border border-white/30 text-white px-3 py-1 rounded-lg text-sm font-semibold w-max uppercase tracking-wider">
-                {work.client}
-              </div>
-            </div>
+          <div className="relative w-full h-[60px] md:h-[80px]" style={{ color: work.hexOverlay }}>
+            <svg
+              viewBox="0 0 429 90"
+              fill="none"
+              className="w-full h-full block"
+              preserveAspectRatio="none"
+            >
+              <path d="M428.625 35.0943V136.589C428.625 152.326 428.625 167.249 428.625 170L1.03513e-06 170C-1.56688e-05 167.148 0.000175319 164.808 0.000175319 159.068V77.9695C0.000175319 70.9826 5.03458 65.0132 11.904 63.8674L388.605 1.00885C409.565 -2.47661 428.625 13.7568 428.625 35.0862" fill="currentColor" />
+            </svg>
 
-            {/* Floating Arrow Icon */}
-            <div className="absolute top-2 right-2 md:top-4 md:right-4 w-11 h-11 md:w-13 md:h-13 bg-white rounded-full flex items-center justify-center shadow-xl z-20 overflow-hidden pointer-events-auto">
-              <div className="relative w-full h-full">
-                <div className="absolute inset-0 flex items-center justify-center transition-transform duration-500 ease-[cubic-bezier(0.7,0,0.3,1)] group-hover:translate-x-10 group-hover:-translate-y-10">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <path d="M7 17L17 7M17 7H7M17 7V17" stroke="black" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
+            {/* Floating Arrow Up Right */}
+            <div className="absolute top-[30%] right-2 bg-white text-black w-9 h-9 rounded-full shadow-lg overflow-hidden pointer-events-auto"
+              style={{
+                transform: "translate3d(0%, -30%, 0px)",
+                transformStyle: "preserve-3d"
+              }}
+            >
+              <div className="relative w-full h-full transition-transform duration-500 group-hover:-translate-y-full group-hover:translate-x-full">
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <FiArrowUpRight size={18} strokeWidth={2} />
                 </div>
-                <div className="absolute inset-0 flex items-center justify-center transition-transform duration-500 ease-[cubic-bezier(0.7,0,0.3,1)] -translate-x-10 translate-y-10 group-hover:translate-x-0 group-hover:translate-y-0">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <path d="M7 17L17 7M17 7H7M17 7V17" stroke="black" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
+                <div className="absolute inset-0 flex items-center justify-center -translate-x-full translate-y-full transition-all duration-500">
+                  <FiArrowUpRight size={18} strokeWidth={2} />
                 </div>
               </div>
             </div>
           </div>
+
+          <div style={{ backgroundColor: work.hexOverlay }} className="w-full px-4 pb-4 pt-1 flex flex-col gap-2 rounded-b-[0.7rem] -mt-[1px]">
+            <h3 className="text-white text-[1.1rem] md:text-2xl font-bold leading-tight tracking-tight">
+              {work.title}
+            </h3>
+            <div className="flex">
+              <span className="px-3 py-1 rounded-xl text-white font-bold text-[10px] md:text-sm uppercase tracking-wider bg-white/20 backdrop-blur-sm border border-white/30">
+                {work.client}
+              </span>
+            </div>
+          </div>
         </div>
-      </Motion.div>
-    </Motion.div>
+      </div>
+    </div>
   );
 };
 
@@ -229,9 +147,7 @@ const workData = [
     client: "Bullit",
     videoSrc: "https://gethyped.b-cdn.net/Bullit/Bullit%20%7C%20Loop.mp4",
     link: "/work/bullit",
-    borderColor: "border-[#FF4D14]",
     hexOverlay: "#FF4D14",
-    slant: "up",
   },
   {
     id: 2,
@@ -239,9 +155,7 @@ const workData = [
     client: "Roasta",
     videoSrc: "https://gethyped.b-cdn.net/Roasta/roasta-loop.mp4",
     link: "/work/roasta",
-    borderColor: "border-[#0084FF]",
     hexOverlay: "#0084FF",
-    slant: "up",
   },
   {
     id: 3,
@@ -249,42 +163,62 @@ const workData = [
     client: "Loco",
     videoSrc: "https://gethyped.b-cdn.net/Loco/loco-bites-loop.mp4",
     link: "/work/loco-loco",
-    borderColor: "border-[#00B48A]",
     hexOverlay: "#00B48A",
-    slant: "up",
   },
 ];
 
 const SelectedWork = () => {
-  return (
-    <section id="selected-work" className="section_selected-work bg-[#FAF4EC] py-14 md:py-20 lg:py-32 overflow-hidden">
-      <div className="padding-global max-w-350 mx-auto px-5 md:px-8">
+  const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
 
-        {/* Row 1: Header Block */}
-        <div className="mb-8 md:mb-4 md:pl-12">
-          <h2 className="text-[2.5rem] md:text-[4.5rem] lg:text-[5rem] font-black text-black leading-[1.05] tracking-tight mb-4 md:mb-6">
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Your requested mobile stacking logic - reduced overlap based on feedback
+  const spaceY = useTransform(scrollYProgress, [0, 0.5], ["-20px", "-50px"]);
+  const rotate = useTransform(scrollYProgress, [0, 0.5], [0, 0]); // Prepared for rotation if needed
+
+  return (
+    <section id="selected-work" ref={sectionRef} className="section_selected-work bg-[#FAF4EC] py-14 md:py-24 lg:py-32 px-5 md:px-6 overflow-hidden">
+      <div className="max-w-7xl md:px-20 mx-auto">
+
+        {/* Header Block */}
+        <div className="mb-10 md:mb-20 md:pl-8 md:w-1/2">
+          <h2 className="text-4xl md:text-[5.5rem] font-bold tracking-tighter leading-none mb-6 text-black">
             Content<br />dat scoort.
           </h2>
-          <div className="max-w-110">
-            <p className="text-[1rem] md:text-[1.25rem] font-semibold text-gray-800 leading-normal mb-5 md:mb-8">
-              Wij vertellen jouw verhaal. Op een manier die écht past bij jouw doelgroep. Met creatieve content die werkt en het verschil maakt.
-            </p>
+          <p className="text-[1.1rem] md:text-2xl font-semibold md:leading-[1.1] text-black/80 max-w-lg">
+            Wij vertellen jouw verhaal. Op een manier die écht past bij jouw doelgroep. Met creatieve content die werkt en het verschil maakt.
+          </p>
+          <div className="mt-4">
             <JellyButton href="/work">Bekijk al ons werk</JellyButton>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 pt-2 md:pt-0 gap-5 md:gap-8 lg:gap-20 items-start max-w-7xl">
-          <div className="lg:mt-18">
-            <WorkCard work={workData[0]} index={0} />
-          </div>
-
-          <div className="lg:-mt-8">
-            <WorkCard work={workData[1]} index={1} />
-          </div>
-
-          <div className="lg:-mt-32">
-            <WorkCard work={workData[2]} index={2} />
-          </div>
+        {/* Grid Container */}
+        <div className="grid grid-cols-1 md:grid-cols-3 md:gap-12 lg:gap-16 items-start">
+          {workData.map((work, index) => (
+            <Motion.div
+              key={work.id}
+              style={{
+                marginBottom: isMobile && index !== workData.length - 1 ? spaceY : 0,
+                rotate: isMobile ? (index === 0 ? 2 : index === 1 ? -2 : 1) : 0,
+                marginTop: !isMobile ? (index === 0 ? '4px' : index === 1 ? '-80px' : '-155px') : '0px'
+              }}
+              className="md:!rotate-0 md:!mb-0"
+            >
+              <WorkCard work={work} index={index} isMobile={isMobile} />
+            </Motion.div>
+          ))}
         </div>
 
       </div>

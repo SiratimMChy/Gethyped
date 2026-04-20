@@ -1,39 +1,40 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion as Motion } from 'framer-motion';
 
-/* ─── Easings ─────────────────────────────────────────── */
 const BOUNCE_EASE = [0.34, 2.27, 0.64, 1];
-const SLIDE_EASE  = [0.32, 0.72, 0, 1];
-
-/* ─── Components ──────────────────────────────────────── */
+const SLIDE_EASE = [0.32, 0.72, 0, 1];
 
 const JellyButton = ({ href, children }) => {
   const [hovered, setHovered] = useState(false);
-  const [active,  setActive]  = useState(false);
+  const [active, setActive] = useState(false);
 
   const state = active ? 'pressed' : hovered ? 'hover' : 'idle';
 
   const innerVariants = {
-    idle:    { skewY: 0,  rotate: 0,  scale: 1 },
-    hover:   { skewY: -4, rotate: -1, scale: 1.02,
-               transition: { duration: 0.3, ease: BOUNCE_EASE } },
-    pressed: { skewY: 0,  rotate: 0,  scale: 0.95,
-               transition: { duration: 0.1, ease: 'easeOut' } },
+    idle: { skewY: 0, rotate: 0, scale: 1 },
+    hover: {
+      skewY: -4, rotate: -1, scale: 1.02,
+      transition: { duration: 0.3, ease: BOUNCE_EASE }
+    },
+    pressed: {
+      skewY: 0, rotate: 0, scale: 0.95,
+      transition: { duration: 0.1, ease: 'easeOut' }
+    },
   };
 
   const iconVariants = {
-    idle: { 
+    idle: {
       scale: 1,
       backgroundColor: '#1A1A1A',
       color: '#FAF4EC'
     },
-    hover: { 
-      scale: 0.92, 
+    hover: {
+      scale: 0.92,
       backgroundColor: '#1A1A1A',
       color: '#FAF4EC',
-      transition: { duration: 0.2, ease: 'easeOut' } 
+      transition: { duration: 0.2, ease: 'easeOut' }
     },
-    pressed: { 
+    pressed: {
       scale: 1,
       backgroundColor: '#1A1A1A',
       color: '#FAF4EC'
@@ -64,7 +65,7 @@ const JellyButton = ({ href, children }) => {
           initial="idle"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 22 21" fill="none">
-            <path d="M11.2832 20.9176L9.14509 18.8002L15.5491 12.3962L-0.00939941 12.3962L-0.00939941 9.30322L15.5491 9.30322L9.14509 2.9096L11.2832 0.78186L21.3511 10.8497L11.2832 20.9176Z" fill="currentColor"/>
+            <path d="M11.2832 20.9176L9.14509 18.8002L15.5491 12.3962L-0.00939941 12.3962L-0.00939941 9.30322L15.5491 9.30322L9.14509 2.9096L11.2832 0.78186L21.3511 10.8497L11.2832 20.9176Z" fill="currentColor" />
           </svg>
         </Motion.span>
       </span>
@@ -83,17 +84,21 @@ const DownArrowSvg = ({ color }) => (
 
 const IconArrowButton = ({ href }) => {
   const [hovered, setHovered] = useState(false);
-  const [active,  setActive]  = useState(false);
+  const [active, setActive] = useState(false);
 
   const state = active ? 'pressed' : hovered ? 'hover' : 'idle';
 
   // Skew animation to match the JellyButton
   const innerVariants = {
-    idle:    { skewX: 0, rotate: 0, scale: 1 },
-    hover:   { skewX: -1, rotate: -1, scale: 1.02,
-               transition: { duration: 0.3, ease: BOUNCE_EASE } },
-    pressed: { skewX: 0, rotate: 0, scale: 0.95,
-               transition: { duration: 0.1, ease: 'easeOut' } },
+    idle: { skewX: 0, rotate: 0, scale: 1 },
+    hover: {
+      skewX: -1, rotate: -1, scale: 1.02,
+      transition: { duration: 0.3, ease: BOUNCE_EASE }
+    },
+    pressed: {
+      skewX: 0, rotate: 0, scale: 0.95,
+      transition: { duration: 0.1, ease: 'easeOut' }
+    },
   };
 
   return (
@@ -151,7 +156,7 @@ const Intro = () => {
     <section id="intro-home" className="section_intro bg-[#FAF4EC] py-6 md:py-32 overflow-hidden">
       <div className="padding-global max-w-[1440px] mx-auto px-5 md:px-8">
         <div className="container-col-12">
-          
+
           {/* Main Heading — matching Webflow's structure */}
           <div className="grid grid-cols-1 lg:grid-cols-12 mb-12 lg:mb-32">
             <div className="lg:col-span-12">
@@ -168,16 +173,16 @@ const Intro = () => {
 
           {/* Bottom Grid: Video + Content + Scroll Button */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 items-end">
-            
+
             {/* 1. Small Video Card (md:col-span-3) */}
             <div className="p-1 md:col-span-5 lg:col-span-3 order-1 rotate-[4deg] md:rotate-0 transition-transform max-w-[86%] md:max-w-none">
               <div className="small-image aspect-[2/3] md:aspect-4/5 rounded-xl overflow-hidden relative shadow-lg">
-                <img 
+                <img
                   src="https://cdn.prod.website-files.com/6848603da8e6ac95794b7498/6894757aa6dd3f84f6e463a2_Anniek%20Bril.webp"
                   alt="Anniek Bril"
                   className="w-full h-full object-cover hidden md:block"
                 />
-                <video 
+                <video
                   ref={videoRef}
                   muted loop playsInline autoPlay
                   className="w-full h-full object-cover md:hidden"

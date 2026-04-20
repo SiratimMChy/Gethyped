@@ -165,12 +165,12 @@ const Footer = () => {
           </Motion.div>
         ))}
       </AnimatePresence>
-      <div className="relative z-20 hidden lg:flex flex-col items-center text-center px-6 pt-12 lg:pt-16 pb-8 lg:pb-12 overflow-hidden">
+      <div className="relative hidden lg:flex flex-col items-center text-center px-6 pt-12 lg:pt-16 pb-8 lg:pb-12 overflow-hidden">
         <h2 className="text-[clamp(3.5rem,7vw,88px)] text-[#161616] font-semibold leading-[1.5em] tracking-[-0.05em] mb-2.5 relative z-0">
           Let's Get Hyped!
         </h2>
 
-        <div className="relative flex z-10 items-center justify-center gap-3 cursor-pointer flex-wrap">
+        <div className="relative flex z-20 items-center justify-center gap-3 cursor-pointer flex-wrap">
           <Motion.a
             href="mailto:info@gethyped.nl"
             variants={buttonVariants}
@@ -257,9 +257,9 @@ const Footer = () => {
             }}
           ></div>
 
-          <div className="relative pt-0 lg:pt-0 -mt-8 min-[375px]:-mt-7 min-[425px]:-mt-4.5 md:-mt-0 lg:mt-auto lg:-mb-18 w-full lg:w-auto lg:shrink-0 lg:self-end flex justify-center lg:justify-start lg:pl-0.5 origin-center lg:origin-bottom-left" style={{ transform: 'rotateX(4deg) rotateY(-10deg) rotateZ(1deg)' }}>
+          <div className="relative pt-0 lg:pt-0 -mt-8 min-[375px]:-mt-7 min-[425px]:-mt-4.5 md:-mt-0 lg:mt-auto lg:-mb-12 w-full lg:w-auto lg:shrink-0 lg:self-end flex justify-center lg:justify-start lg:pl-0.5 origin-center lg:origin-bottom-left" style={{ transform: 'rotateX(4deg) rotateY(-10deg) rotateZ(1deg)' }}>
             <div className="flex justify-center lg:justify-start items-center lg:items-end py-1 md:pt-2 lg:pt-4 md:pb-0 lg:pb-0 px-2 lg:px-0 z-10 w-full lg:w-auto overflow-visible">
-              <div className="transform origin-center lg:origin-left scale-[1.08] min-[375px]:scale-[1.18] min-[425px]:scale-[1.35] md:scale-[1.75] lg:scale-[1.05] flex justify-center lg:justify-start w-full lg:w-auto ml-0 items-center lg:items-end">
+              <div className="transform origin-center lg:origin-left scale-[1.08] min-[375px]:scale-[1.18] min-[425px]:scale-[1.35] md:scale-[1.75] lg:scale-[1.50] flex justify-center lg:justify-start w-full lg:w-auto ml-0 items-center lg:items-end">
                 <Logo width={300} height={200} />
               </div>
             </div>
